@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,8 +62,8 @@ public class MovementController {
 		}
 	}
 
-	@PutMapping("/modify/{id}")
-	public ResponseEntity<Movement> modify(@PathVariable("id") long id, @RequestBody Movement movement) {
+	@PutMapping("/modify")
+	public ResponseEntity<Movement> modify(@RequestParam("id") Long id, @RequestBody Movement movement) {
 		Optional<Movement> movementData = movementRepository.findById(id);
 
 		if (movementData.isEmpty()) {
@@ -80,8 +80,8 @@ public class MovementController {
 		}
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
+	@DeleteMapping("/delete")
+	public ResponseEntity<HttpStatus> delete(@RequestParam("id") Long id) {
 		try {
 			movementRepository.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -32,7 +32,17 @@ public class Client {
 
 	    
 
-	    // Getters y Setters
+	    public Client(Long clientId, String nombre, String direccion, String telefono, String contrasenya, Boolean estado) {
+	    	this.clienteId = clientId;
+	    	this.nombre = nombre;
+	    	this.direccion = direccion;
+	    	this.telefono = telefono;
+	    	this.contrasena = contrasenya;
+	    	this.estado = estado;
+	    	
+		}
+
+		// Getters y Setters
 	    public Long getClienteId() {
 	        return clienteId;
 	    }

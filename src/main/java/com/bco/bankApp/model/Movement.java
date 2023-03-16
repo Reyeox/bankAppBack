@@ -40,7 +40,20 @@ public class Movement {
     @Column(name="createDate")
     private Date createDate;
     
-    public Long getId() {
+    public Movement(Long id ,Long movementId, String tipoCuenta, String saldoInicial, String clientId, Long numeroCuenta, Boolean estado, Long movimiento, Long saldoDisponible, Date createDate) {
+    	this.id = id;
+    	this.movementId = movementId;
+    	this.tipoCuenta = tipoCuenta;
+    	this.saldoInicial = saldoInicial;
+    	this.clientId = clientId;
+    	this.numeroCuenta = numeroCuenta;
+    	this.estado = estado;
+    	this.movimiento = movimiento;
+    	this.saldoDisponible = saldoDisponible;
+    	this.createDate = createDate;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
