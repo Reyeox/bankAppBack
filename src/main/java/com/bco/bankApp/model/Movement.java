@@ -1,15 +1,20 @@
 package com.bco.bankApp.model;
 
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "movements")
 public class Movement {
+	
+	@Column(name = "id")
+	private Long id;
+	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="movementId")
-	private Number movementId;
+	private Long movementId;
 
 	@Column(name = "tipo_cuenta")
     private String tipoCuenta;
@@ -21,38 +26,57 @@ public class Movement {
     private String clientId;
     
     @Column(name = "numero_cuenta")
-    private String numeroCuenta;
+    private Long numeroCuenta;
     
     @Column(name = "estado")
-    private String estado;
+    private Boolean estado;
     
     @Column(name = "movimiento")
-    private String movimiento;
+    private Long movimiento;
     
     @Column(name = "saldo_disponible")
-    private String saldoDisponible;
+    private Long saldoDisponible;
+    
+    @Column(name="createDate")
+    private Date createDate;
+    
+    public Long getId() {
+		return id;
+	}
 
-	public String getMovimiento() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Long getMovimiento() {
 		return movimiento;
 	}
 
-	public void setMovimiento(String movimiento) {
+	public void setMovimiento(Long movimiento) {
 		this.movimiento = movimiento;
 	}
 
-	public String getSaldoDisponible() {
+	public Long getSaldoDisponible() {
 		return saldoDisponible;
 	}
 
-	public void setSaldoDisponible(String saldoDisponible) {
+	public void setSaldoDisponible(Long saldoDisponible) {
 		this.saldoDisponible = saldoDisponible;
 	}
 
-	public String getNumeroCuenta() {
+	public Long getNumeroCuenta() {
 		return numeroCuenta;
 	}
 
-	public void setNumeroCuenta(String numeroCuenta) {
+	public void setNumeroCuenta(Long numeroCuenta) {
 		this.numeroCuenta = numeroCuenta;
 	}
 
@@ -72,19 +96,19 @@ public class Movement {
 		this.saldoInicial = saldoInicial;
 	}
 
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
     
-	public Number getMovementId() {
+	public Long getMovementId() {
 		return movementId;
 	}
 
-	public void setMovementId(Number movementId) {
+	public void setMovementId(Long movementId) {
 		this.movementId = movementId;
 	}
 

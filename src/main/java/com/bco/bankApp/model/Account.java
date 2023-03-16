@@ -24,12 +24,12 @@ public class Account {
     private String saldoInicial;
     
     @Column(name = "estado")
-    private String estado;
+    private Boolean estado;
     
     @Column(name="client_id")
     private String clientId;
     
-	public Account(Long id,Long numerocuenta, String tipoCuenta, String saldoInicial, String estado, String clientId) {
+	public Account(Long id,Long numerocuenta, String tipoCuenta, String saldoInicial, boolean estado, String clientId) {
 		// TODO Auto-generated constructor stub
 		this.numeroCuenta = numerocuenta;
 		this.id = id;
@@ -39,13 +39,7 @@ public class Account {
 		this.clientId = clientId;
 		
 	}
-
-	
-
-	public Account(long id2, long numerocuenta2, String tipoCuenta2, String saldoInicial2, String estado2,
-			String clientId2) {
-		// TODO Auto-generated constructor stub
-	}
+	public Account() {}
 
 
 
@@ -89,11 +83,11 @@ public class Account {
 		this.saldoInicial = saldoInicial;
 	}
 
-	public String getEstado() {
+	public Boolean getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
     

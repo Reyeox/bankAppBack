@@ -1,12 +1,11 @@
 package com.bco.bankApp.controller;
 
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.Assert;
-import org.junit.Before;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -31,19 +30,12 @@ public class AccountControllerTests {
     @MockBean
     private AccountRepository accountRepository;
 
-    private List<Account> accountList;
-
-    @Before
-    public void setUp() {
-        accountList = new ArrayList<>();
-        accountList.add(new Account(1L, 123123L, "cuenta1", "1000", "activo", "cliente1"));
-        accountList.add(new Account(2L, 1231312L , "cuenta2", "2000", "inactivo", "cliente2"));
-    }
+  
 
     @Test
     public void returnsNoAccount() {
         Mockito.when(accountRepository.findAll()).thenReturn(Collections.emptyList());
-        ResponseEntity<List<Account>> response = accountController.getClients();
+        ResponseEntity<List<Account>> response = accountController.getAccounts();
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
@@ -51,7 +43,7 @@ public class AccountControllerTests {
 
     @Test
     public void returnAValidAccountAndCreate() {
-        Account account = new Account(1L, 123123L, "cuenta1", "1000", "activo", "cliente1");
+        Account account = new Account(1L, 123123L, "cuenta1", "1000", true, "cliente1");
         Mockito.when(accountRepository.save(account)).thenReturn(account);
         ResponseEntity<Account> response = accountController.createAccount(account);
         Assert.assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -60,7 +52,7 @@ public class AccountControllerTests {
 
     @Test
     public void returnAnInternalServerWhenCreateUser() {
-        Account account = new Account(1L, 123123L, "cuenta1", "1000", "activo", "cliente1");
+        Account account = new Account(1L, 123123L, "cuenta1", "1000", true, "cliente1");
         Mockito.when(accountRepository.save(account)).thenThrow(new IllegalArgumentException());
         ResponseEntity<Account> response = accountController.createAccount(account);
         Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());

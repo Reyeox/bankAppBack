@@ -1,10 +1,12 @@
 package com.bco.bankApp.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -28,6 +31,7 @@ public class MovementController {
 
 	@Autowired
 	MovementRepository movementRepository;
+	
 
 	@GetMapping("/")
 	public ResponseEntity<List<Movement>> getMovements() {
@@ -50,6 +54,7 @@ public class MovementController {
 	@PostMapping("/create")
 	public ResponseEntity<Movement> create(@RequestBody Movement movement) {
 		try {
+			
 			Movement _movement = movementRepository.save(movement);
 			return new ResponseEntity<>(_movement, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -83,6 +88,23 @@ public class MovementController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@GetMapping("/report")
+	public ResponseEntity<List<Movement>> getReport(
+	        @RequestParam("beginDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date beginDate,
+	        @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+	        @RequestParam("clientId") String clientId) {
+	    try {
+	        List<Movement> reportList = movementRepository.getReport(beginDate, endDate, clientId);
+	        if (reportList.isEmpty()) {
+	            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	        } else {
+	            return new ResponseEntity<>(reportList, HttpStatus.OK);
+	        }
+	    } catch (Exception e) {
+	        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
 	}
 
 

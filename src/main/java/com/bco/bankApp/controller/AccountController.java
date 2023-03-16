@@ -31,7 +31,7 @@ public class AccountController {
 	AccountRepository accountRepository;
 
 	@GetMapping("/")
-	public ResponseEntity<List<Account>> getClients() {
+	public ResponseEntity<List<Account>> getAccounts() {
 		try {
 			List<Account> accounts = new ArrayList<Account>();
 			accounts=accountRepository.findAll();

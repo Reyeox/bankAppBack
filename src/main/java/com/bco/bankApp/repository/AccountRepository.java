@@ -9,6 +9,6 @@ import com.bco.bankApp.model.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-	
+	Account findByNumeroCuenta(Long numeroCuenta);
 	
 }
